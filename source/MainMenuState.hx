@@ -211,14 +211,7 @@ class MainMenuState extends MusicBeatState
 									spr.kill();
 								}
 							});
-
-							else
-							{
-								new FlxTimer().start(0.7, function(tmr:FlxTimer)
-								{
-									goToState();
-								});
-							}
+						
 						}
 					});
 				}
