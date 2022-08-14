@@ -84,8 +84,17 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = true;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		// magenta.scrollFactor.set();
-
+		// magenta.scrollFactor.set(); 
+		
+		var logoBl:FlxSprite;
+		logoBl = new FlxSprite(750, 180);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = true;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
+		add(logoBl);
+		
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -99,7 +108,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			// menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
@@ -185,8 +194,8 @@ class MainMenuState extends MusicBeatState
 					{
 						if (curSelected != spr.ID)
 						{
-							FlxTween.tween(spr, {alpha: 0}, 1.3, {
-								ease: FlxEase.quadOut,
+							FlxTween.tween(spr, {y: 9000}, 0.6, {
+								ease: FlxEase.linear,
 								onComplete: function(twn:FlxTween)
 								{
 									spr.kill();
@@ -195,16 +204,17 @@ class MainMenuState extends MusicBeatState
 						}
 						else
 						{
-							if (FlxG.save.data.flashing)
-							{
-								FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							FlxTween.tween(spr, {x: -1000}, 0.6, {
+								ease: FlxEase.linear,
+								onComplete: function(twn:FlxTween)
 								{
-									goToState();
-								});
-							}
+									spr.kill();
+								}
+							});
+
 							else
 							{
-								new FlxTimer().start(1, function(tmr:FlxTimer)
+								new FlxTimer().start(0.7, function(tmr:FlxTimer)
 								{
 									goToState();
 								});
@@ -219,7 +229,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			// spr.screenCenter(X);
 		});
 	}
 	

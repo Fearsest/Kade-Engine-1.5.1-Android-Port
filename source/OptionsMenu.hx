@@ -67,6 +67,9 @@ class OptionsMenu extends MusicBeatState
 	var blackBorder:FlxSprite;
 	override function create()
 	{
+                #if PRELOAD_ALL
+                FlxG.sound.playMusic(Paths.music('title'), 1);
+                #end
 		instance = this;
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
 
